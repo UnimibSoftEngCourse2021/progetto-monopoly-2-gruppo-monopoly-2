@@ -1,6 +1,6 @@
-projectKey=Monopoly_Workspace
+projectKey=Monopoly
 serverUrl=http://localhost:9000
 serverVersion=8.6.0.39681
-dashboardUrl=http://localhost:9000/dashboard?id=Monopoly_Workspace
-ceTaskId=AXbuhddAT2Elle2vj_Xd
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXbuhddAT2Elle2vj_Xd
+dashboardUrl=http://localhost:9000/dashboard?id=Monopoly
+ceTaskId=AXbyOjTDv3I4w3O_dKgJ
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXbyOjTDv3I4w3O_dKgJ

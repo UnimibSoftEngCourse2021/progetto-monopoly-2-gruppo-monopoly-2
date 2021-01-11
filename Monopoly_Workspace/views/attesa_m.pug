@@ -3,8 +3,32 @@ html
   head
     title Sala Attesa
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm", crossorigin="anonymous")
   body
     block content
-    p bo
+    p #{username}
+    div
+      script.
+        function hide(){
+          document.getElementById('div1').style.display ='none';}
+      script.
+        function show(){
+          document.getElementById('div1').style.display = 'block';}
+      p Modialità
+      input(type="radio", name="modalita", checked=modalita=="normal", onclick='hide()', value="Normale", style="margin: 8px")
+      | Normale
+      input(type="radio", name="modalita", checked=modalita=="time", onclick='show()', value="Tempo", style="margin: 8px")
+      | Tempo
+    div(id="div1" style="display: none;")
+      p Tempo partita
+      input(type="text" placeholder="Minuti")
+    div
+      p Difficoltà
+      div(class="btn-group", role="diffi")
+      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="easy", value="Easy")
+      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="medium", value="Medium")
+      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="medium", value="Hard")
+
+
 
 
