@@ -1,5 +1,5 @@
 class WebServer {
-  var sessioni = List<Sessione>;
+  var sessioni = [];
   var factory;
 
   function creaSessione(username) {
@@ -32,5 +32,9 @@ class WebServer {
       }
     });
     return null;
+  }
+
+  function concludiSessione(codPartita){
+    sessioni.delete(getSessione(codPartita));
   }
 }
