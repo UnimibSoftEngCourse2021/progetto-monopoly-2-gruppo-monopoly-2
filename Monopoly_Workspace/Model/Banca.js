@@ -1,21 +1,22 @@
-function Banca(){
+class Banca{
 
+    constructor(){
     var numeroCase=40;
     var numeroAlberghi=20;
     var Asta;
+    }
 
 
-
-    function creaAsta(prezzoIniziale,proprieta){
-        Asta = Asta(prezzoIniziale,proprieta);
+    creaAsta(prezzoIniziale,proprieta){
+        this.Asta = new Asta(prezzoIniziale,proprieta);
 
     }
 
-    function riceviIndennita(){
+    riceviIndennita(){
         Giocatore.soldi()+= 100;
     }
 
-    function ChiudiAsta(){
+    ChiudiAsta(){
         // Da implementare
     }
 
