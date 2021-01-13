@@ -20,12 +20,12 @@ class ClassName {
 
   //inizializza una sessione, viene chiamata quando il giocatore master
   //lascia la sala d'attesa.
-  function inizializza() {
+  inizializza() {
 
   }
 
   //restituisce un giocatore della sessione in base all'username dato in input
-  function getGiocatore(username) {
+  getGiocatore(username) {
     forEach((giocatori, i) => {
       if(i.username == username){
         return i;
@@ -35,8 +35,13 @@ class ClassName {
   }
 
   //aggiunge un giocatore alla sessione in questione e quindi anche alla lista
-  function addGiocatore(username, tipo) {
-    giocatori.add(new Giocatore(username, tipo));
+  addGiocatore(username, tipo) {
+    if(giocatori.length <= 5){
+      giocatori.add(new Giocatore(username, tipo, this, giocatori.length + 1);
+      return true;
+    }else{
+      return false;
+    }
   }
 
   //inizia una trattativa e la aggiunge alla lista.
@@ -44,7 +49,7 @@ class ClassName {
   //richiesta : lo stesso di offerta
   //offerente : username dell'utente offerente
   //aquirente : username dell'utente aquirente
-  function inizioTrattativa(offerta, richiesta, offerente, aquirente) {
+  inizioTrattativa(offerta, richiesta, offerente, aquirente) {
     var offerente = getGiocatore(offerente);
     var aquirente = getGiocatore(aquirente)
     trattative.add(new Trattativa(offerta, richiesta, this.offerente, this.aquirente))
@@ -52,7 +57,7 @@ class ClassName {
 
   //setta l'esito di una trattativa, se l'esito risulta positivo allora
   //la funzione chiama valuta esito trattativa
-  function setEsitoTrattativa(esito, offerta, richiesta,offerente, aquirente) {
+  setEsitoTrattativa(esito, offerta, richiesta,offerente, aquirente) {
     var trattativa  = getTrattativa(offerta, richiesta,offerente, aquirente);
     trattativa.esito = esito;
     if(esito == false){
@@ -65,7 +70,7 @@ class ClassName {
   }
 
   //si occupa di eseguire le azioni ce conseguono dall'accettazione di un offerta
-  function valutaEsitoTrattative(trattativa) {
+  valutaEsitoTrattative(trattativa) {
     var offerta = trattativa.offerta;
     var richiesta = trattativa.richiesta;
     var offerente = trattativa.offerente;
@@ -87,7 +92,7 @@ class ClassName {
   }
 
   //prende in input dei dati e restitutisce una trattativa con quei dati
-  function getTrattativa(offerta, richiesta, offerente, aquirente) {
+  getTrattativa(offerta, richiesta, offerente, aquirente) {
     forEach((trattative, i) => {
       if (i.offerta == offerta &&
          i.richiesta == richiesta &&
@@ -101,8 +106,29 @@ class ClassName {
 
   //funzione che viene chiamata se un giocatore va in bancarotta e che lo elimina
   //dalla lista dei giocatori
-  function bancarottaGiocatore(username) {
-    giocatori.delete(getGiocatore(username));
+  bancarottaGiocatore(giocatore) {
+    giocatori.delete(giocatore);
   }
 
+
+  passaTurno(){
+    turnoGiocatore = next(turnoGiocatore);
+  }
+
+  //funzione che restituisce, dato un giocatore in input, il giocatore col turno successivo
+  next(giocatore){
+    if (giocatore.numeroTurno != giocatori.length + 1){
+      forEach((giocatori, i) => {
+        if(i.numeroTurno + 1 == giocatore.numeroTurno){
+          return i;
+        }
+      });
+    }else{
+      forEach((giocatori, i) => {
+        if (i.numeroTurno == 1) {
+          return i;
+        }
+      });
+    }
+  }
 }
