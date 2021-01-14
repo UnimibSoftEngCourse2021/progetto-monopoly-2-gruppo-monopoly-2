@@ -1,9 +1,11 @@
-function proprieta(){
+class proprieta{
+
+    constructor(){
     var nome;
     var contratto;
     var proprietaVenduta = false;
+    }
 
 
-
-    function offertaAcquisto()
+    offertaAcquisto()
 }
