@@ -2,33 +2,43 @@ doctype html
 html
   head
     title Sala Attesa
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm", crossorigin="anonymous")
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
   body
     block content
-    p #{username}
-    div
-      script.
-        function hide(){
-          document.getElementById('div1').style.display ='none';}
-      script.
-        function show(){
-          document.getElementById('div1').style.display = 'block';}
-      p Modialità
-      input(type="radio", name="modalita", checked=modalita=="normal", onclick='hide()', value="Normale", style="margin: 8px")
-      | Normale
-      input(type="radio", name="modalita", checked=modalita=="time", onclick='show()', value="Tempo", style="margin: 8px")
-      | Tempo
-    div(id="div1" style="display: none;")
-      p Tempo partita
-      input(type="text" placeholder="Minuti")
-    div
-      p Difficoltà
-      div(class="btn-group", role="diffi")
-      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="easy", value="Easy")
-      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="medium", value="Medium")
-      input(type="button", class="btn btn-secondary", name="difficolta", checked=difficolta=="medium", value="Hard")
-
-
+    p.set Username
+    p.username #{user}
+    div.column-left 
+      form(action="/" method="GET")
+        script.
+          function hideTimeDiv(){
+            document.getElementById('tempo').style.display ='none';}
+        script.
+          function showTimeDiv(){
+            document.getElementById('tempo').style.display = 'block';}
+        div(id="modalita")
+          p.set Modialità
+          input(type="radio", name="modalita" checked=modalita=="normal" onclick='hideTimeDiv()' value="Normale" style="margin: 8px")
+          | Normale
+          input(type="radio", name="modalita" checked=modalita=="time" onclick='showTimeDiv()' value="Tempo" style="margin: 8px")
+          | Tempo
+        br
+        div(id="tempo" style="display: none;")
+          p Tempo partita
+          input(type="text" placeholder="Minuti")
+        br
+        p.set Difficoltà
+        div(id="difficolta")
+          input(type="radio", name="difficolta" checked=modalita=="easy" value="easy" style="margin: 8px")
+          | Facile
+          input(type="radio", name="difficolta" checked=modalita=="noraml" value="normal" style="margin: 8px")
+          | Normale
+          input(type="radio", name="difficolta" checked=modalita=="hard" value="hard" style="margin: 8px")
+          | Hard
+        br
+        button(type="submit" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Gioca
+    div.player
+      script
+        function 
 
 

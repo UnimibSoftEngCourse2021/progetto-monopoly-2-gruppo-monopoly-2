@@ -18,3 +18,20 @@ a {
 .dim{
   width: 50%;
 }
+
+.column-left {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px; 
+}
+
+.set{
+  font-size: large;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.username{
+  font-size: 110%;
+  font-family: fantasy;
+}
