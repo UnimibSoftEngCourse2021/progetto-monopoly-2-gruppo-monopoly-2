@@ -1,4 +1,4 @@
-//// TODO: rifinire cambiaPosizione, costruisciCostruzione, getMonopolio, vendiCostruzione, ipotecaProprieta, riscattaIpoteca, rimuoviProprieta,addProprieta
+//// TODO: rifinire cambiaPosizione, costruisciCostruzione, vendiCostruzione, ipotecaProprieta, riscattaIpoteca, rimuoviProprieta,addProprieta
 
 
 class giocatore{
@@ -127,18 +127,65 @@ class giocatore{
 
     //funzione che viene chiamata quando si vuole costruire una casa o un albergo su una proprieta
     costruisciCostruzione(contratto){
-      if(getMonopolio(contratto)){
+      if (contratto.numeroCase < 4 && possoCostruire(contratto)) {
+        contratto.numeroCase++;
+        sessione.banca.numeroCase--;
+        return true;
+      } else if (contratto.numeroCase = 4 &&
+                 sessione.banca.numeroAlberghi != 0 &&
+                 possocCostruire(contratto)) {
+        contratto.numeroAlberghi = 1;
+        contratto.numeroCase = 0;
+        sessione.banca.numeroCase += 4;
+        sessione.banca.numeroAlberghi--;
+        return true;
+      }else {
+        return false;
+      }
+    }
 
+    //ipotizzo che il numro di case di una proprieta sia nel contratto : da verificare
+    //prende un contratto come input e restituisce se e possibile costruire case su quella casella
+    possoCostruire(contratto){
+      if (getMonopolio(contratto) ||
+          contratto.numeroAlberghi != 0 ||
+          sessione.banca.numeroCase != 0) { //controllo se si ha il monopolio
+        var ris = true;
+        forEach((contratti, i) => { //controllo per ogni proprieta se il numero di case permette di costruirne un'altra
+          if (i.colore = contratto.colore) {
+            if (i.numeroAlberghi == 0 && //controllo se il numero di case per ogni proprieta del monopolio se soddisfano i requisiti
+                i.numeroCase < contratto.numeroCase) {
+              ris = false;
+            }
+          }
+        });
+        return ris;
+      }else{
+        return false;
       }
     }
 
     //restituisce true se il giocatore ha il monopolio del contratto passato
     getMonopolio(contratto){
-      forEach((sessione.board.caselle, i) => {
-        if (i.colore) {
-
+      var val1 = 0, val2 = 0;
+      forEach((contratti, i) => { //conto la quantita di contratti del giocatore dello stesso colore di contratto come parametro
+        if (i.colore == contratto.colore) {
+          val1++;
         }
       });
+      forEach((sessione.board.caselle, i) => {// conto la quantita di contratti nulla board dello stesso colore del contratto passato per parametri
+        if (i instanceof Proprieta &&
+            i.edificabile &&
+            i.contratto.colore == contratto.colore) {
+          val2++;
+        }
+      });
+      if (val1 == val2) {// se i due risultati sono uguali allora rignifica che l'utente ha il monopolio di quel colore
+        return true;
+      }else{ // altrimenti non li ha tutti
+        return false;
+      }
+
     }
 
     //funzione che viene chiamata quando si vuole costruire una casa o albergo su una proprieta
@@ -165,8 +212,4 @@ class giocatore{
     rimuoviProprieta(contratto){
 
     }
-
-
-
-
 }
