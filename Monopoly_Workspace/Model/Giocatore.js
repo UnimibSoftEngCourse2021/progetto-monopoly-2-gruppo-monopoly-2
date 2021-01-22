@@ -1,4 +1,4 @@
-//// TODO: rifinire cambiaPosizione, costruisciCostruzione, vendiCostruzione, ipotecaProprieta, riscattaIpoteca, rimuoviProprieta,addProprieta
+//// TODO: rifinire cambiaPosizione
 
 
 class giocatore{
@@ -127,16 +127,16 @@ class giocatore{
 
     //funzione che viene chiamata quando si vuole costruire una casa o un albergo su una proprieta
     costruisciCostruzione(contratto){
-      if (contratto.numeroCase < 4 && possoCostruire(contratto)) {
-        contratto.numeroCase++;
-        sessione.banca.numeroCase--;
+      if (contratto.numeroCase < 4 && possoCostruire(contratto)) { // verifico se devo costruie una casa e posso costruire
+        contratto.numeroCase++; //costruisco una casa
+        sessione.banca.numeroCase--; //tolgo alla banca
         return true;
       } else if (contratto.numeroCase = 4 &&
                  sessione.banca.numeroAlberghi != 0 &&
-                 possocCostruire(contratto)) {
-        contratto.numeroAlberghi = 1;
-        contratto.numeroCase = 0;
-        sessione.banca.numeroCase += 4;
+                 possocCostruire(contratto)) { // verifico se devo costruire un albergo e se posso costruirlo
+        contratto.numeroAlberghi = 1; //costruisco albergo
+        contratto.numeroCase = 0; // tolgo le case
+        sessione.banca.numeroCase += 4; //prendo e resttuisco alla banca quallo che mi spetta
         sessione.banca.numeroAlberghi--;
         return true;
       }else {
@@ -190,26 +190,74 @@ class giocatore{
 
     //funzione che viene chiamata quando si vuole costruire una casa o albergo su una proprieta
     vendiCostruzione(contratto){
+      if (possoVendere(contratto)) { //controll che si possa vendere
+        if (contratto.numeroAlberghi != 0) { // decido se si dee vendere una casa o un albergo
+          contratto.numeroAlberghi--;
+          sessione.banca.numeroAlberghi++;
+          return true;
+        } else { //nel caso non ci siano alberghi allora vendo una casa
+          contratto.numeroCase--;
+          sessione.banca.numeroCase++;
+          return true;
+        }
+      }
+      return false;
+    }
 
+    possoVendere(contratto){
+      var ris = true;
+      forEach((contratti, i) => { // scorro tutte le proprietà possedute dal giocatore
+        if(i.colore == contratto.colore) { //se la Proprieta del giocatore è dello stesso colore di quella passata come parametro
+          if (contratto.numeroAlberghi == 0 &&
+              (i.numeroCase > contratto.numeroCase ||
+               (i.numeroAlberghi != 0 && contratto.numeroCase == 4))) {
+                 ris = false;
+          }
+        }
+      });
+      return ris;
     }
 
     //quando si vuole ipotecare una proprieta
     ipotecaProprieta(contratto){
-
+      var verifica = true;
+      forEach((contratti, i) => { //verifico che su tutto il gruppo di proprieta del monopolio non ci siano Proprieta
+        if (i.colore == contratto.colore &&
+            (i.numeroCase != 0 ||
+             i.numeroAlberghi != 0)) {
+              varifica = false;
+        }
+      });
+      if (contratto.ipotecato == false && vrifica) { //se il contratto non è gia ipotecato e verifica == true allora ipoteco la proprieta
+        contratto.impotecato = true;
+        this.soldi += (contratto.valore / 2); //aggiungo i soldi dell'ipoteca al giocatore
+        return true;
+      }
+      return false;
     }
 
     //quando si vuole riscattare un ipoteca
     riscattaIpoteca(contratto){
-
+      var prezzo = (contratto.valore / 2) + (contratto.valore * 10 / 100);
+      if (contratto.ipotecato == true) { //controllo che la proprieta sia ipotecata
+        paga("Banca", prezzo); //pago alla banca il prezzo da pagare
+        contratto.ipotecato = false; //deipoteco la proprietà
+        return true;
+      }
+      return false;
     }
 
     //aggiunge una proprieta alla lista
     addProprieta(contratto){
-
+      if (contratto != null) {
+        this.contratti.add(contratto);
+      }
     }
 
     //rimuove una proprieta dalla lista
     rimuoviProprieta(contratto){
-
+      if (contratto != null) {
+        this.contratti.delete(contratto);
+      }
     }
 }
