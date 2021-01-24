@@ -2,9 +2,16 @@ var express = require('express');
 //var Singleton = require('./Model/WebServerSingleton');
 var router = express.Router();
 var username;
-var socket = require('../socketapi');
+var io = require('../socketapi').io;
 
-socket.
+
+//questa è solo una prova
+io.on('connection', (socket) => {
+  socket.on('saluta', () => {
+    console.log("ma vaffanculo");
+  });
+});
+
 
 /* GET home page. */
 router.post('/', function(req, res, next) {

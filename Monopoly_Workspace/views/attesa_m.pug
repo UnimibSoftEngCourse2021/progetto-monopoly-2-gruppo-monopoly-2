@@ -18,7 +18,8 @@ html
             document.getElementById('tempo').style.display ='none';}
         script.
           function showTimeDiv(){
-            document.getElementById('tempo').style.display = 'block';}
+            document.getElementById('tempo').style.display = 'block';
+            socket.emit('saluta');}
         div(id="modalita")
           p.set Modialità
           input(type="radio", name="modalita" checked=modalita=="normal" onclick='hideTimeDiv()' value="Normale" style="margin: 8px")
@@ -42,6 +43,3 @@ html
         button(type="submit" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Gioca
     div.auto
       h1 utente
-
-
-
