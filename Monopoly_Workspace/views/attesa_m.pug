@@ -4,11 +4,14 @@ html
     title Sala Attesa
     link(rel='stylesheet' href='/stylesheets/style.css')
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
+    script(src='/socket.io/socket.io.js')
+    script.
+      var socket = io();
   body
     block content
-    p.set Username
-    p.username #{user}
     div.column-left 
+      p.set Username
+      p.username #{user}
       form(action="/" method="GET")
         script.
           function hideTimeDiv(){
@@ -27,8 +30,8 @@ html
           p Tempo partita
           input(type="text" placeholder="Minuti")
         br
-        p.set Difficoltà
         div(id="difficolta")
+          p.set Difficoltà
           input(type="radio", name="difficolta" checked=modalita=="easy" value="easy" style="margin: 8px")
           | Facile
           input(type="radio", name="difficolta" checked=modalita=="noraml" value="normal" style="margin: 8px")
@@ -37,8 +40,8 @@ html
           | Hard
         br
         button(type="submit" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Gioca
-    div.player
-      script
-        function 
+    div.auto
+      h1 utente
+
 
 

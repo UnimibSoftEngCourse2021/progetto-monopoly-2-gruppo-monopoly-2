@@ -26,6 +26,19 @@ a {
   height: 300px; 
 }
 
+.column-centre {
+  float:inline-end;
+  width: 25%;
+  padding: 10px;
+  height: 300px; 
+}
+
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
 .set{
   font-size: large;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
