@@ -3,13 +3,16 @@ var express = require('express');
 var router = express.Router();
 var username;
 var io = require('../socketapi').io;
+var webServer = require('../Model/WebServer');
 
 
-//questa è solo una prova
 io.on('connection', (socket) => {
-  socket.on('saluta', () => {
-    console.log("ma vaffanculo");
+  socket.on('crea sessione', (user) => {
+    var ws = new webServer();
+    var key = ws.creaSessione(user);
+    socket.join(key);
   });
+  socket.emit('ricevi chiave', key);
 });
 
 

@@ -1,8 +1,14 @@
 class WebServer {
+
+
+
   var sessioni = [];
   var factory;
 
-  creaSessione(username) {
+  constructor();
+
+
+  function creaSessione(username) {
     var key = keyGen();
     var sessione = new Sessione(key);
     sessione.addGiocatore(username, "Master");
@@ -10,11 +16,11 @@ class WebServer {
     return key;
   }
 
-  accediSessione(username, codPartita) {
+  function accediSessione(username, codPartita) {
     getSessione(codPartita).addGiocatore(username, "Ospite");
   }
 
-  keyGen() {
+  function keyGen() {
     var key;
     do{
       key = randkey.get({
@@ -25,7 +31,7 @@ class WebServer {
     return key;
   }
 
-  getSessione(key) {
+  function getSessione(key) {
     forEach((sessioni, i) => {
       if(i.codicePartita = key){
         return i;
@@ -34,7 +40,9 @@ class WebServer {
     return null;
   }
 
-  concludiSessione(codPartita){
+  function concludiSessione(codPartita){
     sessioni.delete(getSessione(codPartita));
   }
 }
+
+module.exports = webserver;

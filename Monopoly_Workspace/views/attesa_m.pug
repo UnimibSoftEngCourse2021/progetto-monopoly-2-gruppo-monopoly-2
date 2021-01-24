@@ -5,21 +5,23 @@ html
     link(rel='stylesheet' href='/stylesheets/style.css')
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     script(src='/socket.io/socket.io.js')
+    script(src='./socketUser.js')
     script.
-      var socket = io();
+      socket.on('ricevi chiave', (key) => {
+        document.getElementById('key').innerHTML = key});
   body
     block content
     div.column-left 
       p.set Username
       p.username #{user}
+      h1 key
+      p(id='key')
       form(action="/" method="GET")
         script.
           function hideTimeDiv(){
             document.getElementById('tempo').style.display ='none';}
-        script.
           function showTimeDiv(){
-            document.getElementById('tempo').style.display = 'block';
-            socket.emit('saluta');}
+            document.getElementById('tempo').style.display = 'block';}     
         div(id="modalita")
           p.set Modialità
           input(type="radio", name="modalita" checked=modalita=="normal" onclick='hideTimeDiv()' value="Normale" style="margin: 8px")
@@ -42,4 +44,7 @@ html
         br
         button(type="submit" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Gioca
     div.auto
-      h1 utente
+      h1 Utenti
+      ul
+      each element in users
+        li= element
