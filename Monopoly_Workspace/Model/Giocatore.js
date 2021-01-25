@@ -3,17 +3,17 @@
 
 class giocatore{
 
-  var username;
-  var tipoGiocatore;
-  var soldi;
-  var cotrattti;
-  var sessione;
-  var posizione;
-  var tipoPedina;
-  var turniPrigione;
-  var loyaltyPoints;
-  var cartaPrigione;
-  var numeroTurno;
+  username;
+  tipoGiocatore;
+  soldi;
+  cotrattti;
+  sessione;
+  posizione;
+  tipoPedina;
+  turniPrigione;
+  loyaltyPoints;
+  cartaPrigione;
+  numeroTurno;
 
 
     constructor(username, tipoGiocatore, sessione, turno){
@@ -261,3 +261,4 @@ class giocatore{
       }
     }
 }
+

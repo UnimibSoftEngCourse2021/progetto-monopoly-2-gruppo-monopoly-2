@@ -5,17 +5,13 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm", crossorigin="anonymous")
     script(src='/socket.io/socket.io.js')
-    script(src='/socketUser.js')
     script.
+      var socket = io();
       function creaSessione(){
-          var utente = documnet.getElementById('username');
-          socket.emit("crea sessione", {utente.value});
+        var utente = document.getElementById("username").value;
+        alert(utente);
+        socket.emit('crea sessione', utente);
       }
-      /*function entraSessione(){
-        var utente = documnet.getElemntById('username');
-        var codicePart = documnet.getElemntById('codicePartita');
-        socket.emit("");
-      }*/
   body
     block content
     div.center
@@ -29,8 +25,7 @@ html
         input(type="text", placeholder="Codice Partita", id="codicePartita", name="code_parita", size="50" style="margin:5px")
         br
         br
-        //div.center
-        button(type="submit" onlick="creaSessione()" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Crea Partita   
-        button(type="submit" onlcik="" name="home_button" value="uni" class="btn btn-primary" style="margin:5px") Unisciti
+        button(type="submit" onclick="creaSessione()" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Crea Partita   
+        button(type="submit" onclcik="creaSessione()" name="home_button" value="uni" class="btn btn-primary" style="margin:5px") Unisciti
 
   

@@ -1,38 +1,31 @@
+
+var Sessione =require('./Sessione');
 class WebServer {
+   sessioni = [];
+   factory;
 
-
-
-  var sessioni = [];
-  var factory;
-
-  constructor();
-
-
-  function creaSessione(username) {
-    var key = keyGen();
+  creaSessione(username) {
+    var key = this.keyGen();
     var sessione = new Sessione(key);
     sessione.addGiocatore(username, "Master");
     sessioni.add(sessione);
     return key;
   }
 
-  function accediSessione(username, codPartita) {
+  accediSessione(username, codPartita) {
     getSessione(codPartita).addGiocatore(username, "Ospite");
   }
 
-  function keyGen() {
+  keyGen() {
     var key;
     do{
-      key = randkey.get({
-        length: 6,
-        numbers: true
-      });
-    }while(getSessione(key));
+      key = Math.round(Math.random() * 1000000);
+    }while(this.getSessione(key));
     return key;
   }
 
-  function getSessione(key) {
-    forEach((sessioni, i) => {
+  getSessione(key) {
+    this.sessioni.forEach((i) => {
       if(i.codicePartita = key){
         return i;
       }
@@ -40,9 +33,9 @@ class WebServer {
     return null;
   }
 
-  function concludiSessione(codPartita){
+  concludiSessione(codPartita){
     sessioni.delete(getSessione(codPartita));
   }
 }
 
-module.exports = webserver;
+module.exports = WebServer;

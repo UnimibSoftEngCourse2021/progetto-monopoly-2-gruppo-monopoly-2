@@ -1,17 +1,17 @@
 //TODO scrivere la funzione inizializza
+var giocatore = require('./Giocatore');
+class Sessione {
 
-class ClassName {
-
-  var codicePartita;
-  var modalitaPartita;
-  var tempo;
-  var difficoltaPartita;
-  var dynamicValue;
-  var giocatori = [];
-  var trattative = [];
-  var board;
-  var turnoGiocatore;
-  var banca;
+  codicePartita;
+  modalitaPartita;
+  tempo;
+  difficoltaPartita;
+  dynamicValue;
+  giocatori = [];
+  trattative = [];
+  board;
+  turnoGiocatore;
+  banca;
 
 
   constructor(codicePartita) {
@@ -26,7 +26,7 @@ class ClassName {
 
   //restituisce un giocatore della sessione in base all'username dato in input
   getGiocatore(username) {
-    forEach((giocatori, i) => {
+    this.giocatori.forEach((i) => {
       if(i.username == username){
         return i;
       }
@@ -36,8 +36,8 @@ class ClassName {
 
   //aggiunge un giocatore alla sessione in questione e quindi anche alla lista
   addGiocatore(username, tipo) {
-    if(giocatori.length <= 5){
-      giocatori.add(new Giocatore(username, tipo, this, giocatori.length + 1);
+    if(this.giocatori.length <= 5){
+      this.giocatori.add(new Giocatore(username, tipo, this, giocatori.length + 1));
       return true;
     }else{
       return false;
@@ -132,3 +132,5 @@ class ClassName {
     }
   }
 }
+
+module.exports = Sessione;

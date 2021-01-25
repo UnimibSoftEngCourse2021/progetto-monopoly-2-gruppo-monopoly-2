@@ -4,15 +4,17 @@ var router = express.Router();
 var username;
 var io = require('../socketapi').io;
 var webServer = require('../Model/WebServer');
-
+var ws = new webServer();
 
 io.on('connection', (socket) => {
+  console.log('prova');
   socket.on('crea sessione', (user) => {
-    var ws = new webServer();
+    console.log(user);
     var key = ws.creaSessione(user);
+    console.log(key);
     socket.join(key);
+    socket.emit('ricevi chiave', key);
   });
-  socket.emit('ricevi chiave', key);
 });
 
 

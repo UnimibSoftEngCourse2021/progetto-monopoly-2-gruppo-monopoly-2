@@ -6,15 +6,15 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     script(src='/socket.io/socket.io.js')
     script(src='./socketUser.js')
+  body
+    block content
     script.
       socket.on('ricevi chiave', (key) => {
         document.getElementById('key').innerHTML = key});
-  body
-    block content
     div.column-left 
       p.set Username
       p.username #{user}
-      h1 key
+      h1 Match Key
       p(id='key')
       form(action="/" method="GET")
         script.
@@ -43,7 +43,7 @@ html
           | Hard
         br
         button(type="submit" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Gioca
-    div.auto
+    //div.auto
       h1 Utenti
       ul
       each element in users
