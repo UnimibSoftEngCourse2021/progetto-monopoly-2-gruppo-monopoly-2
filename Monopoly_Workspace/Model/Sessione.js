@@ -1,5 +1,5 @@
 //TODO scrivere la funzione inizializza
-var giocatore = require('./Giocatore');
+//var giocatore = require('./Giocatore');
 class Sessione {
 
   codicePartita;

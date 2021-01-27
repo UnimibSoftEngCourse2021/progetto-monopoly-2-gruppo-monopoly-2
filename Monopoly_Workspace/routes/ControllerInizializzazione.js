@@ -6,9 +6,11 @@ var io = require('../socketapi').io;
 var webServer = require('../Model/WebServer');
 var ws = new webServer();
 
+
 io.on('connection', (socket) => {
-  console.log('prova');
-  socket.on('crea sessione', (user) => {
+  console.log("Utente connesso");
+  console.log(socket.id);
+  socket.on('crea_sessione', (user) => {
     console.log(user);
     var key = ws.creaSessione(user);
     console.log(key);
@@ -16,6 +18,8 @@ io.on('connection', (socket) => {
     socket.emit('ricevi chiave', key);
   });
 });
+
+
 
 
 /* GET home page. */

@@ -1,7 +1,7 @@
 //// TODO: rifinire cambiaPosizione
 
 
-class giocatore{
+class Giocatore{
 
   username;
   tipoGiocatore;
@@ -16,19 +16,19 @@ class giocatore{
   numeroTurno;
 
 
-    constructor(username, tipoGiocatore, sessione, turno){
-      this.username = username;
-      this.tipoGiocatore = tipoGiocatore;
-      this.soldi = 0;
-      this.contratti = [];
-      this.sessione = sessione;
-      this.posizione = 1
-      this.tipoPedina = //// TODO:
-      this.loyaltyPoints = 0;
-      this.cartaPrigione = false;
-      this.turniPrigione = 0;
-      this.numeroTurno = turno;
-    }
+  constructor(username, tipoGiocatore, sessione, turno){
+    this.username = username;
+    this.tipoGiocatore = tipoGiocatore;
+    this.soldi = 0;
+    this.contratti = [];
+    this.sessione = sessione;
+    this.posizione = 1
+    this.tipoPedina = //// TODO:
+    this.loyaltyPoints = 0;
+    this.cartaPrigione = false;
+    this.turniPrigione = 0;
+    this.numeroTurno = turno;
+  }
 
 
 
@@ -46,7 +46,7 @@ class giocatore{
             paga("Banca", 125);
             cambiaPosizione(valoreDadi[0]+valoreDadi[1]);
           }else{ //aumenta il numero di turni attuali in prigione
-            turniPrigione++;
+            this.turniPrigione++;
           }
         }
     }
@@ -84,10 +84,10 @@ class giocatore{
     //pago una certa quantita di loyalty points, restituisce il resto dei soldi da pagare
     pagaLoyaltyPoints(denaro){
       if(denaro > loyaltyPoints){ //se il denaro da pagare e maggiore dei loyaltyPoints li azzero e restituisco il resto da pagare
-        loyaltyPoints = 0;
+        this.loyaltyPoints = 0;
         return denaro - loyaltyPoints;
       }else{ //se bastano i loyaltyPoints allora li diminuisco e restituisco 0
-          loyaltyPoints = loyaltyPoints - denaro;
+          this.loyaltyPoints = loyaltyPoints - denaro;
           return 0;
       }
     }
@@ -99,9 +99,9 @@ class giocatore{
       }else {
         var nuovoPrezzo = pagaLoyaltyPoints(denaro); //pago con la quantita di loyalty points sufficente
         if(beneficiario.equals("Banca")){ //se si deve pagare la banca vengono solo scalati i soldi
-          soldi = soldi - nuovoPrezzo;
+          this.soldi = soldi - nuovoPrezzo;
         }else{ //se va pagato un giocatore si scalano i soldi e si aggiungono a lui
-          soldi = soldi - nuovoPrezzo;
+          this.soldi = soldi - nuovoPrezzo;
           beneficiario.soldi = beneficiario.soldi + denaro;
         }
       }
@@ -111,11 +111,11 @@ class giocatore{
     getPatrimonioTotale(){
       var pat = 0;
 
-      forEach((contratti, i) => { //scorro tutte le proprieta possedute e sommo il lovo valore da ipotecate a pat
+      contratti.forEach((i) => { //scorro tutte le proprieta possedute e sommo il lovo valore da ipotecate a pat
         pat = pat + (i.valore / 2);
       });
 
-      pat = pat + denaro = loyaltyPoints; //sommo a pat la quantita di denario che si ha
+      this.loyaltyPoints = pat + denaro; //sommo a pat la quantita di denario che si ha
       return pat;
     }
 
@@ -173,7 +173,7 @@ class giocatore{
           val1++;
         }
       });
-      forEach((sessione.board.caselle, i) => {// conto la quantita di contratti nulla board dello stesso colore del contratto passato per parametri
+      sessione.board.caselle.forEach((i) => {// conto la quantita di contratti nulla board dello stesso colore del contratto passato per parametri
         if (i instanceof Proprieta &&
             i.edificabile &&
             i.contratto.colore == contratto.colore) {
@@ -225,7 +225,7 @@ class giocatore{
         if (i.colore == contratto.colore &&
             (i.numeroCase != 0 ||
              i.numeroAlberghi != 0)) {
-              varifica = false;
+              this.varifica = false;
         }
       });
       if (contratto.ipotecato == false && vrifica) { //se il contratto non è gia ipotecato e verifica == true allora ipoteco la proprieta
