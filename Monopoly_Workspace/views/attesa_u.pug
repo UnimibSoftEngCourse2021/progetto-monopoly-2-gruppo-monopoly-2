@@ -3,6 +3,9 @@ html
   head
     title Sala Attesa
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/socket.io/socket.io.js')
+    //script.
+      var socket= io();
   body
     block content
     p #{user}

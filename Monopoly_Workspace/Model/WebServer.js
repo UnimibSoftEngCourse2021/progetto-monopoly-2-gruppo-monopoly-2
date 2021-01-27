@@ -8,12 +8,16 @@ class WebServer {
     var key = this.keyGen();
     var sessione = new Sessione(key);
     sessione.addGiocatore(username, "Master");
-    sessioni.add(sessione);
+    this.sessioni.push(sessione);
     return key;
   }
 
   accediSessione(username, codPartita) {
-    getSessione(codPartita).addGiocatore(username, "Ospite");
+    console.log(username);
+    console.log(codPartita);
+    var temp = this.getSessione(codPartita);
+    console.log(temp);
+    temp.addGiocatore(username, "Ospite");
   }
 
   keyGen() {
@@ -25,16 +29,19 @@ class WebServer {
   }
 
   getSessione(key) {
+    console.log("cip");
+    var ris = null;
     this.sessioni.forEach((i) => {
-      if(i.codicePartita = key){
-        return i;
+      console.log("cod : " + i.codicePartita + " key : " + key);
+      if(i.codicePartita == key){
+        ris = i;
       }
     });
-    return null;
+    return ris;
   }
 
   concludiSessione(codPartita){
-    sessioni.delete(getSessione(codPartita));
+    this.sessioni.delete(getSessione(codPartita));
   }
 }
 

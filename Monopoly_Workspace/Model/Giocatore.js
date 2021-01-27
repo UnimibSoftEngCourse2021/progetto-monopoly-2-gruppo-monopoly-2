@@ -262,3 +262,4 @@ class Giocatore{
     }
 }
 
+module.exports = Giocatore;

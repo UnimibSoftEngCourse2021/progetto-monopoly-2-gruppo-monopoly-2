@@ -1,5 +1,5 @@
 //TODO scrivere la funzione inizializza
-//var giocatore = require('./Giocatore');
+var Giocatore = require('./Giocatore');
 class Sessione {
 
   codicePartita;
@@ -37,7 +37,7 @@ class Sessione {
   //aggiunge un giocatore alla sessione in questione e quindi anche alla lista
   addGiocatore(username, tipo) {
     if(this.giocatori.length <= 5){
-      this.giocatori.add(new Giocatore(username, tipo, this, giocatori.length + 1));
+      this.giocatori.push(new Giocatore(username, tipo, this, this.giocatori.length + 1));
       return true;
     }else{
       return false;
@@ -112,7 +112,7 @@ class Sessione {
 
 
   passaTurno(){
-    turnoGiocatore = next(turnoGiocatore);
+    this.turnoGiocatore = next(turnoGiocatore);
   }
 
   //funzione che restituisce, dato un giocatore in input, il giocatore col turno successivo

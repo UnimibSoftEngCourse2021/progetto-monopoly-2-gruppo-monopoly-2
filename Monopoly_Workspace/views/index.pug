@@ -10,9 +10,17 @@ html
       var socket = io();
       function creaSessione(){
         var utente = document.getElementById("username").value;
-        alert(utente);
         socket.emit('crea_sessione', utente);
-      }
+      };
+    script.
+      function accediSessione(){
+        alert("proco ");
+        var utente = document.getElementById("username").value;
+        var cod_p = document.getElementById("codicePartita").value;
+        var temp = {"user": utente, "u_key": cod_p};
+        socket.emit('unisciti',temp );
+        console.log(temp);
+      };
   body
     block content
     div.center
@@ -27,6 +35,6 @@ html
         br
         br
         button(type="submit" onclick="creaSessione()" name="home_button" value="cp" class="btn btn-primary" style="margin:5px") Crea Partita   
-        button(type="submit" onclcik="creaSessione()" name="home_button" value="uni" class="btn btn-primary" style="margin:5px") Unisciti
+        button(type="submit" onclick="accediSessione()" name="home_button" value="uni" class="btn btn-primary" style="margin:5px") Unisciti
 
   

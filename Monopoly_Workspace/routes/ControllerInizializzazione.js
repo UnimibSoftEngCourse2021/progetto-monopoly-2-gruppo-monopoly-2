@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var username;
 var io = require('../socketapi').io;
+var sessione = require('../Model/Sessione');
 var webServer = require('../Model/WebServer');
 var ws = new webServer();
 
@@ -10,13 +11,23 @@ var ws = new webServer();
 io.on('connection', (socket) => {
   console.log("Utente connesso");
   console.log(socket.id);
+  var key;
   socket.on('crea_sessione', (user) => {
-    console.log(user);
-    var key = ws.creaSessione(user);
+    console.log("Utente master: " + user);
+    this.key = ws.creaSessione(user);
     console.log(key);
     socket.join(key);
-    socket.emit('ricevi chiave', key);
   });
+  socket.emit('ricevi chiave', this.key);
+  socket.on('unisciti', (data) => {
+    console.log("Giocatore:" + data.user + "si è unito alla parita" + data.u_key);
+    ws.accediSessione(data.user, data.u_key);
+    socket.join(data.u_key);
+    var ses = ws.getSessione(data.u_key);
+    ses.giocatori.forEach((i) => {
+      console.log(i.username);
+    });
+  })
 });
 
 
