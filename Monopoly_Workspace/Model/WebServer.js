@@ -8,7 +8,7 @@ class WebServer {
     var key = this.keyGen();
     var sessione = new Sessione(key);
     sessione.addGiocatore(username, "Master");
-    sessioni.add(sessione);
+    this.sessioni.push(sessione);
     return key;
   }
 

@@ -4,7 +4,7 @@ var arrayImprevisti = require("../public/informazioniBoard/Imprevisti.json");
 var arrayProb = require("../public/informazioniBoard/Probabilita.json");
 var arrayContratti = require ("../public/informazioniBoard/Contratto.json")
 console.log(arrayProb);
--
+
 function sattolo(array) {
     const len = array.length;
     for (let i = 0; i < len - 1; i++) { // 0 to n -1, exclusive because the last item doesn't need swapping
@@ -64,3 +64,4 @@ class Board{
         sattolo(carteImp)
     }
 }
+module.exports = Board;
