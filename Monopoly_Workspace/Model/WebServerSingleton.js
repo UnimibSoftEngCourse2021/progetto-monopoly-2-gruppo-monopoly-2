@@ -1,9 +1,9 @@
 class WebServerSingleton {
-  var webServerInstance;
+  webServerInstance;
 
-  function getWebServerInstance(){
+  getWebServerInstance(){
     if(!webServerInstance){
-      webServerInstance = new WebServer();
+      this.webServerInstance = new WebServer();
     }
     return webServerInstance;
   }

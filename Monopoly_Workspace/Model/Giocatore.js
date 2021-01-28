@@ -206,7 +206,7 @@ class Giocatore{
 
     possoVendere(contratto){
       var ris = true;
-      forEach((contratti, i) => { // scorro tutte le proprietà possedute dal giocatore
+      contratti.forEach(( i) => { // scorro tutte le proprietà possedute dal giocatore
         if(i.colore == contratto.colore) { //se la Proprieta del giocatore è dello stesso colore di quella passata come parametro
           if (contratto.numeroAlberghi == 0 &&
               (i.numeroCase > contratto.numeroCase ||
@@ -221,11 +221,11 @@ class Giocatore{
     //quando si vuole ipotecare una proprieta
     ipotecaProprieta(contratto){
       var verifica = true;
-      forEach((contratti, i) => { //verifico che su tutto il gruppo di proprieta del monopolio non ci siano Proprieta
+      contratti.forEach(( i) => { //verifico che su tutto il gruppo di proprieta del monopolio non ci siano Proprieta
         if (i.colore == contratto.colore &&
             (i.numeroCase != 0 ||
              i.numeroAlberghi != 0)) {
-              this.varifica = false;
+              verifica = false;
         }
       });
       if (contratto.ipotecato == false && vrifica) { //se il contratto non è gia ipotecato e verifica == true allora ipoteco la proprieta

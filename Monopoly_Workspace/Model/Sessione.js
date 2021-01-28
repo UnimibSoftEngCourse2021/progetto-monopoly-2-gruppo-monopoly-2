@@ -1,5 +1,5 @@
 //TODO scrivere la funzione inizializza
-var Giocatore = require('./Giocatore');
+var giocatore = require('./Giocatore');
 class Sessione {
 
   codicePartita;
@@ -37,7 +37,7 @@ class Sessione {
   //aggiunge un giocatore alla sessione in questione e quindi anche alla lista
   addGiocatore(username, tipo) {
     if(this.giocatori.length <= 5){
-      this.giocatori.push(new Giocatore(username, tipo, this, this.giocatori.length + 1));
+      this.giocatori.push(new giocatore(username, tipo, this, this.giocatori.length + 1));
       return true;
     }else{
       return false;
@@ -50,8 +50,8 @@ class Sessione {
   //offerente : username dell'utente offerente
   //aquirente : username dell'utente aquirente
   inizioTrattativa(offerta, richiesta, offerente, aquirente) {
-    var offerente = getGiocatore(offerente);
-    var aquirente = getGiocatore(aquirente)
+    this.offerente = getGiocatore(offerente);
+    this.aquirente = getGiocatore(aquirente);
     trattative.add(new Trattativa(offerta, richiesta, this.offerente, this.aquirente))
   }
 
@@ -93,7 +93,7 @@ class Sessione {
 
   //prende in input dei dati e restitutisce una trattativa con quei dati
   getTrattativa(offerta, richiesta, offerente, aquirente) {
-    forEach((trattative, i) => {
+    trattative.forEach(( i) => {
       if (i.offerta == offerta &&
          i.richiesta == richiesta &&
          i.offerente.username == offerente &&
