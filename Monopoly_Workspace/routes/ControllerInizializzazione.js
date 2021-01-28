@@ -24,10 +24,13 @@ io.on('connection', (socket) => {
     ws.accediSessione(data.user, data.u_key);
     socket.join(data.u_key);
     var ses = ws.getSessione(data.u_key);
+    var users_name = [];
     ses.giocatori.forEach((i) => {
-      console.log(i.username);
+      users_name.push(i.username);
     });
-  })
+    console.log(users_name);
+    socket.emit('lista giocatori', "Aasdnukuasenfj");
+  });
 });
 
 
